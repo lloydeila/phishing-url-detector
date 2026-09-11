@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Phishing URL Detector</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #334155;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        input::placeholder {
+            color: #94a3b8;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat h3 {
+            margin: 0 0 10px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .stat p {
+            margin: 0;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 10px;
+            background: #334155;
+        }
+
+        .risk {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .indicators {
+            margin-top: 20px;
+        }
+
+        .history {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #475569;
+        }
+
+        th {
+            color: #94a3b8;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        .note {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 13px;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 700px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .container {
+                margin: 20px auto;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🔐 Phishing URL Detector</h1>
+
+    <p class="description">
+        Analyze URLs for common phishing indicators and track scan history.
+    </p>
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <h3>Total Scans</h3>
+            <p>{{ statistics.total }}</p>
+        </div>
+
+        <div class="stat">
+            <h3>High Risk</h3>
+            <p>{{ statistics.high_risk }}</p>
+        </div>
+
+        <div class="stat">
+            <h3>Suspicious</h3>
+            <p>{{ statistics.suspicious }}</p>
+        </div>
+
+        <div class="stat">
+            <h3>Low Risk</h3>
+            <p>{{ statistics.low_risk }}</p>
+        </div>
+
+    </div>
+
+
+    <!-- SCANNER -->
+
+    <div class="card">
+
+        <form method="POST">
+
+            <label for="url">
+                Enter URL
+            </label>
+
+            <input
+                type="text"
+                id="url"
+                name="url"
+                placeholder="https://example.com"
+                required
+            >
+
+            <button type="submit">
+                🔍 Analyze URL
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- CURRENT RESULT -->
+
+    {% if result %}
+
+    <div class="card">
+
+        <h2>Analysis Result</h2>
+
+        <div class="result">
+
+            <p>
+                <strong>URL:</strong>
+                {{ result.url }}
+            </p>
+
+            <p>
+                <strong>Timestamp:</strong>
+                {{ result.timestamp }}
+            </p>
+
+            <p>
+                <strong>Risk Score:</strong>
+                {{ result.score }}/100
+            </p>
+
+            <p class="risk">
+                Verdict: {{ result.verdict }}
+            </p>
+
+            <div class="indicators">
+
+                <strong>Indicators:</strong>
+
+                <ul>
+
+                    {% for indicator in result.indicators %}
+
+                    <li>
+                        {{ indicator }}
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- SCAN HISTORY -->
+
+    <div class="card">
+
+        <h2>📋 Scan History</h2>
+
+        {% if scans %}
+
+        <div class="history">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>URL</th>
+                        <th>Score</th>
+                        <th>Verdict</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for scan in scans %}
+
+                    <tr>
+
+                        <td>
+                            {{ scan["Timestamp"] }}
+                        </td>
+
+                        <td>
+                            {{ scan["URL"] }}
+                        </td>
+
+                        <td>
+                            {{ scan["Risk Score"] }}/100
+                        </td>
+
+                        <td>
+                            {{ scan["Verdict"] }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <p>
+            No scans recorded yet.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <p class="note">
+        ⚠️ This tool uses heuristic analysis and should not be treated
+        as a definitive security verdict.
+    </p>
+
+</div>
+
+</body>
+</html>

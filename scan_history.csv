@@ -1,0 +1,33 @@
+Timestamp,URL,Risk Score,Verdict,Indicators
+2026-09-10 10:54:41,https://google.com,0,LOW RISK,Domain is listed in the local trusted-domain database
+2026-09-10 11:13:41,https://example.com,0,LOW RISK,Domain is not listed in the local trusted-domain database
+2026-09-10 11:14:03,http://example.com/login?verify=true&account=test,40,SUSPICIOUS,"Uses HTTP instead of HTTPS | Domain is not listed in the local trusted-domain database | Contains suspicious keywords: login, verify, account | Contains a suspicious authentication/payment path"
+2026-09-10 11:17:39,https://example.com,0,LOW RISK,Domain is not listed in the local trusted-domain database
+2026-09-10 11:17:59,http://example.com/login?verify=true&account=test&password=123,55,SUSPICIOUS,"Uses HTTP instead of HTTPS | Domain is not listed in the local trusted-domain database | Contains suspicious keywords: login, verify, account, password | Contains a suspicious authentication/payment path | Contains an unusually high number of special characters"
+2026-09-10 11:19:08,http://192.168.1.100/login,65,SUSPICIOUS,Uses HTTP instead of HTTPS | Uses an IP address instead of a domain | Domain is not listed in the local trusted-domain database | Contains suspicious keywords: login | Contains a suspicious authentication/payment path | Contains multiple subdomains
+2026-09-10 11:26:06,http://example.com/login?verify=true&account=test&password=123,55,SUSPICIOUS,"Uses HTTP instead of HTTPS | Domain is not listed in the local trusted-domain database | Contains suspicious keywords: login, verify, account, password | Contains a suspicious authentication/payment path | Contains an unusually high number of special characters"
+2026-09-10 11:50:23,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-10 11:55:19,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-10 11:55:30,https://example.com/login?verify=true&account=123,25,LOW RISK,"Uses HTTPS | Domain is not listed in the local trusted-domain database | Contains suspicious keywords: login, verify, account | Contains a suspicious authentication or payment path"
+2026-09-11 08:27:15,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 08:38:43,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 08:39:30,http://secure-login-account-verify.com,60,SUSPICIOUS,"Uses HTTP instead of HTTPS | Domain is not listed in the local trusted-domain database | Contains suspicious keywords: login, verify, secure, account | Domain contains multiple hyphens (3) | Suspicious terms found in domain: login, verify, secure, account"
+2026-09-11 08:41:08,not-a-real-url,25,LOW RISK,Uses HTTP instead of HTTPS | Domain is not listed in the local trusted-domain database | Domain contains multiple hyphens (3)
+2026-09-11 08:45:20,not-a-real-url,100,HIGH RISK,Invalid domain name
+2026-09-11 08:45:59,http://,100,HIGH RISK,Invalid or malformed URL
+2026-09-11 08:46:41,example.com,15,LOW RISK,Uses HTTP instead of HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 08:47:25,http://paypal-login-verify-account.com,55,SUSPICIOUS,"Uses HTTP instead of HTTPS | Domain is not listed in the local trusted-domain database | Contains suspicious keywords: login, verify, account | Domain contains multiple hyphens (3) | Suspicious terms found in domain: login, verify, account"
+2026-09-11 08:49:02,http://192.168.1.10/login@verify-account.com,100,HIGH RISK,"Uses HTTP instead of HTTPS | Uses an IP address instead of a domain name | Domain is not listed in the local trusted-domain database | Contains suspicious keywords: login, verify, account | Contains a suspicious authentication or payment path | Contains @ symbol, which can obscure the destination | Contains multiple subdomains (2) | Domain contains several numeric characters (9) | Domain contains an unusually high number of digits"
+2026-09-11 09:04:24,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 09:05:30,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 09:05:30,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 09:05:30,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 09:05:30,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 09:05:30,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 09:05:30,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 09:05:30,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 09:05:30,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 09:05:30,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 09:05:30,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 09:15:53,https://example.com,0,LOW RISK,Uses HTTPS | Domain is not listed in the local trusted-domain database
+2026-09-11 09:36:48,http://paypal-login-verify-account.com,55,SUSPICIOUS,"Uses HTTP instead of HTTPS | Domain is not listed in the local trusted-domain database | Contains suspicious keywords: login, verify, account | Domain contains multiple hyphens (3) | Suspicious terms found in domain: login, verify, account"
