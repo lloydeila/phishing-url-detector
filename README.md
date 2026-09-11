@@ -302,7 +302,7 @@ phishing-url-detector/
 │
 ├── app.py
 ├── detector.py
-├── index.html
+├── 
 ├── scan_history.csv
 ├── README.md
 │
